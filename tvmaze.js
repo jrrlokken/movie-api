@@ -37,33 +37,33 @@ async function searchShows(query) {
   const base_url = "http://api.tvmaze.com/search/shows";
   let query_string = `?q=${query}`;
   const res = await axios.get(`${base_url}${query_string}`);
-  console.log(res.data[0].show.id);
+  return res.data;
 }
 
 /** Populate shows list:
  *     - given list of shows, add shows to DOM
  */
 
-// function populateShows(shows) {
-//   const $showsList = $("#shows-list");
-//   $showsList.empty();
+function populateShows(shows) {
+  const $showsList = $("#shows-list");
+  $showsList.empty();
 
-//   for (let show of shows) {
-//     let $item = $(
-//       `<div class="col-md-6 col-lg-3 Show" data-show-id="${show.id}">
-//          <div class="card" data-show-id="${show.id}">
-//            <div class="card-body">
-//              <h5 class="card-title">${show.name}</h5>
-//              <p class="card-text">${show.summary}</p>
-//            </div>
-//          </div>
-//        </div>
-//       `
-//     );
-
-//     $showsList.append($item);
-//   }
-// }
+  for (let show of shows) {
+    // let $item = $(
+    //   `<div class="col-md-6 col-lg-3 Show" data-show-id="${show.id}">
+    //      <div class="card" data-show-id="${show.id}">
+    //        <div class="card-body">
+    //          <h5 class="card-title">${show.name}</h5>
+    //          <p class="card-text">${show.summary}</p>
+    //        </div>
+    //      </div>
+    //    </div>
+    //   `
+    // );
+    let $item = console.log($item);
+    $showsList.append($item);
+  }
+}
 
 /** Handle search form submission:
  *    - hide episodes area
@@ -79,8 +79,7 @@ $("#search-form").on("submit", async function handleSearch(evt) {
   $("#episodes-area").hide();
 
   let shows = await searchShows(query);
-
-  // populateShows(shows);
+  populateShows(shows);
 });
 
 /** Given a show ID, return list of episodes:
