@@ -29,7 +29,9 @@ async function searchShows(query) {
       id: show.id,
       name: show.name,
       summary: show.summary,
-      image: show.image ? show.image.medium : "https://via.placeholder.com/300",
+      image: show.image
+        ? show.image.medium
+        : "https://via.placeholder.com/300/6C757D/FFFFFF?text=Show+image+unavailable",
     };
   });
   return shows;
@@ -68,9 +70,9 @@ function populateShows(shows) {
 
 $("#search-form").on("submit", async function handleSearch(event) {
   $("#shows-list").empty();
-  $("#shows-list").show();
-  $("#episodes-list").empty();
-  $("#episodes-area").hide();
+  // $("#shows-area").show();
+  // $("#episodes-list").empty();
+  // $("#episodes-area").hide();
 
   event.preventDefault();
   let query = $("#search-query").val();
@@ -108,7 +110,7 @@ function populateEpisodes(episodes) {
       `<li>${episode.name} (Season ${episode.season} - Episode ${episode.number})</li>`
     );
     $episodesList.append($item);
-    $("#episodes-area").show();
+    // $("#episodes-area").show();
   }
 }
 
@@ -116,12 +118,12 @@ function populateEpisodes(episodes) {
 $("#shows-list").on("click", "button", async function handleEpisodes() {
   let showId = $(this).parent().parent().attr("data-show-id");
   let episodes = await getEpisodes(showId);
-  $("#shows-list").hide();
+  // $("#shows-list").hide();
   populateEpisodes(episodes);
 });
 
 /* Back button on episode list */
-$("#back-button").on("click", function () {
-  $("#episodes-area").hide();
-  $("#shows-list").show();
-});
+// $("#back-button").on("click", function () {
+//   $("#episodes-area").hide();
+//   $("#shows-list").show();
+// });
